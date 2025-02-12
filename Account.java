@@ -1,13 +1,12 @@
-class Account {
+public class Account {
     private String accountNumber;
     private double balance;
     private AccountState accountState;
 
-    public Account(String accountNumber, double initialBalance) {
+    public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
-        this.balance = initialBalance;
-        this.accountState = new ActiveState();
-        System.out.println("New Account Created. " + this);
+        this.balance = balance;
+        this.accountState = new ActiveState();  // Initial state when an account is created.
     }
 
     public String getAccountNumber() {
@@ -22,12 +21,12 @@ class Account {
         this.balance = balance;
     }
 
-    public void setAccountState(AccountState accountState) {
-        this.accountState = accountState;
-    }
-
     public AccountState getAccountState() {
         return accountState;
+    }
+
+    public void setAccountState(AccountState accountState) {
+        this.accountState = accountState;
     }
 
     public void deposit(double amount) {
@@ -52,6 +51,6 @@ class Account {
 
     @Override
     public String toString() {
-        return "Account Number:" + accountNumber + ", Balance:" + balance + ", State:" + accountState.getStateName();
+        return "Account Number: " + accountNumber + ", Balance: " + balance;
     }
 }

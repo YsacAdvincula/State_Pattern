@@ -1,15 +1,23 @@
-class ActiveState implements AccountState {
-    
+public class ActiveState implements AccountState {
     @Override
     public void deposit(Account account, double amount) {
         account.setBalance(account.getBalance() + amount);
-        System.out.println("Deposit successful. " + account);
+        System.out.println("Deposit successful. " + account.toString());
     }
 
     @Override
     public void withdraw(Account account, double amount) {
-        account.setBalance(account.getBalance() - amount);
-        System.out.println("Withdrawal successful. " + account);
+        if (account.getBalance() >= amount) {
+            account.setBalance(account.getBalance() - amount);
+            System.out.println("Withdrawal successful. " + account.toString());
+        } else {
+            System.out.println("Insufficient balance for withdrawal.");
+        }
+    }
+
+    @Override
+    public void activate(Account account) {
+        System.out.println("Account is already activated!");
     }
 
     @Override
@@ -19,18 +27,8 @@ class ActiveState implements AccountState {
     }
 
     @Override
-    public void activate(Account account) {
-        System.out.println("Account is already activated!");
-    }
-
-    @Override
     public void close(Account account) {
         account.setAccountState(new ClosedState());
         System.out.println("Account is closed!");
-    }
-
-    @Override
-    public String getStateName() {
-        return "Active";
     }
 }
